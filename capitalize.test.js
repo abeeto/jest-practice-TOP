@@ -1,4 +1,3 @@
-import { expect } from "playwright/test";
 import capitalize from "./capitalize.js";
 
 describe("capitalize function", () => {

@@ -1,4 +1,3 @@
-import { expect } from "playwright/test";
 import reverseString from "./reverseString";
 describe("reverse string function", () => {
   test("reverseString function exists", () => {
