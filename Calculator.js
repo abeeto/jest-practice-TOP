@@ -1,15 +1,20 @@
 export const Calculator = {
-    add: (...args) => {
+    _check_args : function(args) {
         if (args.length !== 2) {
             throw new Error(`${args.length} passed. Expected two arguments`);
         }
-        const [x, y] = args;
-        if (typeof x !== "number" || typeof y !== "number") {
-            throw new Error("Both arguments provided must be numbers");
+        if (typeof args[0] !== "number" || typeof args[1] !== "number") {
+            throw new Error("Invalid argument types passed. Expected two numbers");
         }
+    },
+    add: function(...args) {
+        this._check_args(args);
+        const [x, y] = args;
         return x + y;
     },
-    divide: () => {
-
+    subtract: function(...args){
+        this._check_args(args);
+        const [x, y] = args;
+        return x - y;
     }
 }
