@@ -21,5 +21,11 @@ export const Calculator = {
         this._check_args(args);
         const [x, y] = args;
         return x * y;
+    },
+    divide: function(...args) {
+        this._check_args(args);
+        const [x, y] = args;
+        if (y === 0) throw new Error("Can not divide by zero");
+        return x / y;
     }
 }
