@@ -110,3 +110,53 @@ describe('Calculator should have multiply functionality', () => {
         expect(Calculator.multiply(2.785, 13)).toBeCloseTo(36.205);
     })
 })
+
+describe('Calculator should have divide functionality', () => {
+    test("should have a divide method", () => {
+        expect(Calculator.divide).toBeInstanceOf(Function);
+    })
+    test("throw an error unless two arguments are passed", () => {
+        expect(() => Calculator.divide()).toThrow("0 passed. Expected two arguments");
+        expect(() => Calculator.divide(1)).toThrow("1 passed. Expected two arguments");
+        expect(() => Calculator.divide(2,131,3)).toThrow("3 passed. Expected two arguments");
+    })
+    test.each(
+        [
+            [1,""],
+            ["", ""],
+            ["hi", 3],
+            [12, undefined],
+            [undefined, undefined],
+            [-1, undefined],
+            [2, false],
+            [false, undefined],
+            [false, true]
+        ]
+    )("when two arguments are not valid numbers",
+        (a, b) => expect(() => Calculator.divide(a, b))
+            .toThrow("Invalid argument types passed. Expected two numbers")
+    )
+    test("when two integers are positive", () => {
+        expect(Calculator.divide(10, 4)).toBeCloseTo(2.5);
+        expect(Calculator.divide(200, 123)).toBeCloseTo(1.626);
+        expect(Calculator.divide(1, 3)).toBeCloseTo(0.3333);
+        expect(Calculator.divide(65, 5)).toBe(13);
+        expect(Calculator.divide(0, 10)).toBe(0);
+    })
+    test("when two integers are negative", () => {
+        expect(Calculator.divide(-3, -6)).toBeCloseTo(0.5);
+        expect(Calculator.divide(-141, -3)).toBe(47);
+        expect(Calculator.divide(-8, -3)).toBeCloseTo(2.666);
+    })
+    test("when at least one argument is floating number", () => {
+        expect(Calculator.divide(-3.3, -6)).toBeCloseTo(0.549);
+        expect(Calculator.divide(-1.525, 3)).toBeCloseTo(-0.5083);
+        expect(Calculator.divide(312.5, 5)).toBeCloseTo(62.5);
+    })
+    test("when second argument is zero",
+        () => {
+            expect(() => Calculator.divide(1, 0)).toThrow("Can not divide by zero")
+            expect(() => Calculator.divide(15, 0)).toThrow("Can not divide by zero")
+        }
+    )
+})
