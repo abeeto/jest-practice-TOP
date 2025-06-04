@@ -16,5 +16,10 @@ export const Calculator = {
         this._check_args(args);
         const [x, y] = args;
         return x - y;
+    },
+    multiply: function(...args) {
+        this._check_args(args);
+        const [x, y] = args;
+        return x * y;
     }
 }
