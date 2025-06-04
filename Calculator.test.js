@@ -59,15 +59,54 @@ describe('Calculator should have subtract functionality', () => {
             expect(() => Calculator.subtract(a, b)).toThrow("Invalid argument types passed. Expected two numbers"))
     )
     test("when two integers are positive", () => {
-        expect(Calculator.subtract(10, 4)).toBe(6);
-        expect(Calculator.subtract(200, 123)).toBe(77);
+        expect(Calculator.subtract(10, 4)).toBe(40);
+        expect(Calculator.subtract(20, 301)).toBe(6020);
     })
     test("when two integers are negative", () => {
-        expect(Calculator.subtract(-3, -6)).toBe(3);
+        expect(Calculator.subtract(-3, -6)).toBe(18);
         expect(Calculator.subtract(-141, -6)).toBe(-135);
     })
-    test("when atleast one argument is floating number", () => {
+    test("when at least one argument is floating number", () => {
         expect(Calculator.subtract(-3.3, -6)).toBeCloseTo(2.7);
         expect(Calculator.subtract(-1.525, 3)).toBeCloseTo(-4.525);
+    })
+})
+describe('Calculator should have multiply functionality', () => {
+    test("should have a multiply method", () => {
+        expect(Calculator.multiply).toBeInstanceOf(Function);
+    })
+    test("throw an error unless two arguments are passed", () => {
+        expect(() => Calculator.multiply()).toThrow("0 passed. Expected two arguments");
+        expect(() => Calculator.multiply(1)).toThrow("1 passed. Expected two arguments");
+        expect(() => Calculator.multiply(2,131,3)).toThrow("3 passed. Expected two arguments");
+    })
+    test.each(
+        [
+            [1,""],
+            ["", ""],
+            ["hi", 3],
+            [12, undefined],
+            [undefined, undefined],
+            [-1, undefined],
+            [2, false],
+            [false, undefined],
+            [false, true]
+        ]
+        )("when two arguments are not valid numbers",
+        (a, b) => expect(() => Calculator.multiply(a, b))
+            .toThrow("Invalid argument types passed. Expected two numbers")
+    )
+    test("when two integers are positive", () => {
+        expect(Calculator.multiply(10, 4)).toBe(40);
+        expect(Calculator.multiply(200, 123)).toBe(24600);
+    })
+    test("when two integers are negative", () => {
+        expect(Calculator.multiply(-3, -6)).toBe(18);
+        expect(Calculator.multiply(-141, -6)).toBe(846);
+    })
+    test("when at least one argument is floating number", () => {
+        expect(Calculator.multiply(-3.3, -6)).toBeCloseTo(19.8);
+        expect(Calculator.multiply(-1.525, 3)).toBeCloseTo(-4.575);
+        expect(Calculator.multiply(2.785, 13)).toBeCloseTo(36.205);
     })
 })
